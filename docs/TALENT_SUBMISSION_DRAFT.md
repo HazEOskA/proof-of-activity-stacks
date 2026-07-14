@@ -38,13 +38,13 @@ PENDING — final public frontend URL
 
 Stacks mainnet
 
-**Contract identifier**
+**Planned contract identifier**
 
-PENDING — `<SP_OWNER_ADDRESS>.activity-registry`
+SP2D146EB2KN7A66VEVYBDBXDC0CC496E3NBKY8S4.activity-registry
 
 **Contract owner address**
 
-PENDING — confirmed mainnet `SP...` address
+SP2D146EB2KN7A66VEVYBDBXDC0CC496E3NBKY8S4
 
 **Contract deployment transaction**
 
