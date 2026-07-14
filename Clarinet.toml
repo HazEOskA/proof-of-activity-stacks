@@ -1,0 +1,11 @@
+[project]
+name = "proof-of-activity-stacks"
+description = "Public proof registry for verifiable builder activity on Stacks"
+authors = ["OsaTechGPT"]
+telemetry = false
+cache_dir = ".cache"
+
+[contracts.activity-registry]
+path = "contracts/activity-registry.clar"
+clarity_version = 4
+epoch = "latest"
