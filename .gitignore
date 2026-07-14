@@ -1,0 +1,10 @@
+node_modules/
+dist/
+coverage/
+.cache/
+.clarinet/
+.env
+.env.*
+!.env.example
+.DS_Store
+*.tsbuildinfo
