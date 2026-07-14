@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "types": ["node", "vitest/globals"]
+  },
+  "include": [
+    "node_modules/@stacks/clarinet-sdk/vitest-helpers/src/global.d.ts",
+    "node_modules/@stacks/clarinet-sdk/vitest-helpers/src/vitest.d.ts",
+    "tests/**/*.ts",
+    "vitest.config.ts"
+  ]
+}
