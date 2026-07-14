@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#0b090d" />
+  <meta name="description" content="Deploy and verify Proof of Activity on Stacks mainnet." />
+  <title>Proof of Activity — Stacks Mainnet</title>
+  <style>
+    :root{font-family:Inter,system-ui,sans-serif;color:#f5f5f2;background:#0b090d;--muted:#9b96a3;--border:#2a2530;--orange:#ff5a2d;--lime:#d7ff3f;--panel:#151118;--mono:ui-monospace,SFMono-Regular,Consolas,monospace}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% -10%,rgba(255,90,45,.18),transparent 32%),#0b090d}.shell{width:min(980px,calc(100% - 20px));margin:auto;padding:14px 0 32px}.top{position:sticky;top:8px;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;border:1px solid var(--border);border-radius:16px;background:rgba(11,9,13,.9);backdrop-filter:blur(16px)}.brand{display:flex;align-items:center;gap:10px}.mark{display:grid;place-items:center;width:42px;height:42px;border-radius:12px;background:var(--orange);color:#0b090d;font:900 18px var(--mono)}.brand strong,.brand small{display:block}.brand small{color:var(--muted);font-size:11px}.wallet{min-height:42px;padding:0 13px;border:1px solid rgba(215,255,63,.4);border-radius:12px;background:rgba(215,255,63,.06);color:var(--lime);font:800 12px var(--mono)}.hero{padding:78px 14px 56px;text-align:center}.eyebrow{color:var(--lime);font:800 11px var(--mono);letter-spacing:.16em}.hero h1{max-width:760px;margin:18px auto 14px;font-size:clamp(42px,7vw,74px);line-height:.98;letter-spacing:-.05em}.hero p{max-width:650px;margin:auto;color:#c8c4cd;line-height:1.65}.card{margin-top:16px;padding:20px;border:1px solid var(--border);border-radius:20px;background:linear-gradient(180deg,#17131a,#100d12)}.status{padding:12px 14px;border:1px solid var(--border);border-radius:12px;color:#c7c3cb;background:#100d12;font:12px/1.5 var(--mono)}.status.ok{color:#ddffc0;border-color:rgba(215,255,63,.3);background:rgba(215,255,63,.05)}.status.err{color:#ffb5a4;border-color:rgba(255,90,45,.3);background:rgba(255,90,45,.05)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}.panel{padding:18px;border:1px solid var(--border);border-radius:16px;background:#100d12}.panel h2{margin:0 0 14px;font-size:18px}.step{display:inline-flex;margin-bottom:10px;color:var(--orange);font:800 10px var(--mono);letter-spacing:.12em}.field{margin-top:12px}.field span{display:block;margin-bottom:7px;color:#c9c4cf;font:800 10px var(--mono)}input,textarea{width:100%;border:1px solid var(--border);border-radius:11px;background:#0b090d;color:#fff;outline:none;font:12px/1.5 var(--mono)}input{height:44px;padding:0 12px}textarea{min-height:90px;padding:11px;resize:vertical}.button{width:100%;min-height:50px;margin-top:15px;border:0;border-radius:12px;background:linear-gradient(90deg,var(--orange),var(--lime));color:#0b090d;font:900 12px var(--mono)}.button.secondary{border:1px solid var(--border);background:#17131a;color:#fff}.button:disabled{opacity:.5}.facts{margin-top:14px;padding:13px;border:1px dashed var(--border);border-radius:12px;color:var(--muted);font:11px/1.6 var(--mono);overflow-wrap:anywhere}.links{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}.links a{color:var(--lime);font:11px var(--mono);text-decoration:none}.result{margin-top:14px}.result div{padding:10px 0;border-bottom:1px solid var(--border)}.result small,.result strong{display:block}.result small{color:var(--muted);font:10px var(--mono);text-transform:uppercase}.result strong{margin-top:5px;overflow-wrap:anywhere;font:12px/1.5 var(--mono)}footer{padding:22px 4px 0;color:#66606d;font:10px var(--mono)}@media(max-width:760px){.grid{grid-template-columns:1fr}.hero{padding:62px 10px 44px}.brand small{display:none}.wallet{max-width:140px;overflow:hidden;text-overflow:ellipsis}}
+  </style>
+</head>
+<body>
+<main class="shell">
+  <header class="top">
+    <div class="brand"><span class="mark">P/</span><span><strong>Proof of Activity</strong><small>Stacks mainnet deployment console</small></span></div>
+    <button id="connect" class="wallet">Connect Xverse</button>
+  </header>
+
+  <section class="hero">
+    <div class="eyebrow">DEPLOY → REGISTER → VERIFY</div>
+    <h1>Ship it. Prove it.</h1>
+    <p>This standalone console deploys the immutable activity registry and records the first public receipt on Stacks mainnet.</p>
+  </section>
+
+  <section class="card">
+    <div id="status" class="status">Open this page inside Xverse, then connect the wallet.</div>
+    <div class="grid">
+      <section class="panel">
+        <span class="step">01 · DEPLOY CONTRACT</span>
+        <h2>activity-registry</h2>
+        <div class="field"><span>PLANNED OWNER</span><input id="owner" value="SP2D146EB2KN7A66VEVYBDBXDC0CC496E3NBKY8S4" /></div>
+        <button id="deploy" class="button">SHOW DEPLOY FEE IN XVERSE</button>
+        <div class="facts">Do not approve blindly. Xverse will show the real network fee first. If the wallet has no STX or the amount looks wrong, stop and send a screenshot.</div>
+        <div class="links"><a id="contractLink" href="https://explorer.hiro.so/address/SP2D146EB2KN7A66VEVYBDBXDC0CC496E3NBKY8S4.activity-registry?chain=mainnet" target="_blank">Contract explorer ↗</a><a id="deployTxLink" class="hidden" target="_blank">Deployment tx ↗</a></div>
+      </section>
+
+      <section class="panel">
+        <span class="step">02 · FIRST PUBLIC PROOF</span>
+        <h2>Register receipt</h2>
+        <div class="field"><span>OPERATION LABEL</span><input id="operation" value="proof-of-activity-stacks-mainnet-v1" /></div>
+        <div class="field"><span>ARTIFACT REFERENCE</span><textarea id="artifact">Proof of Activity Stacks mainnet deployment and public verification completed</textarea></div>
+        <div class="field"><span>EVIDENCE URL</span><input id="evidence" value="https://github.com/HazEOskA/proof-of-activity-stacks" /></div>
+        <button id="register" class="button secondary">REGISTER FIRST PROOF</button>
+        <div class="links"><a id="proofTxLink" class="hidden" target="_blank">Proof tx ↗</a></div>
+      </section>
+    </div>
+
+    <section class="panel" style="margin-top:16px">
+      <span class="step">03 · VERIFY ON-CHAIN</span>
+      <h2>Read the receipt directly from Stacks</h2>
+      <button id="verify" class="button secondary">VERIFY PUBLIC RECEIPT</button>
+      <div id="result" class="result"></div>
+    </section>
+  </section>
+  <footer>Never enter a seed phrase or private key into this page. Only approve wallet requests inside Xverse.</footer>
+</main>
+
+<script type="module">
+  import { connect, getLocalStorage, request } from 'https://esm.sh/@stacks/connect@8.1.9';
+  import { Cl, ClarityType, fetchCallReadOnlyFunction } from 'https://esm.sh/@stacks/transactions@7.5.0';
+
+  const CONTRACT_NAME = 'activity-registry';
+  const NETWORK = 'mainnet';
+  const SOURCE = `;; Proof of Activity registry for Stacks.
+;; Stores immutable, wallet-owned execution receipts without custodying assets.
+
+(define-constant err-proof-exists (err u101))
+(define-constant err-empty-evidence (err u102))
+
+(define-data-var total-proofs uint u0)
+
+(define-map proofs
+  { owner: principal, operation-id: (buff 32) }
+  { artifact-hash: (buff 32), evidence-uri: (string-ascii 160), created-at: uint }
+)
+
+(define-public (register-proof (operation-id (buff 32)) (artifact-hash (buff 32)) (evidence-uri (string-ascii 160)))
+  (begin
+    (asserts! (> (len evidence-uri) u0) err-empty-evidence)
+    (asserts! (is-none (map-get? proofs { owner: tx-sender, operation-id: operation-id })) err-proof-exists)
+    (map-set proofs { owner: tx-sender, operation-id: operation-id } { artifact-hash: artifact-hash, evidence-uri: evidence-uri, created-at: stacks-block-height })
+    (var-set total-proofs (+ (var-get total-proofs) u1))
+    (print { event: "proof-registered", owner: tx-sender, operation-id: operation-id, artifact-hash: artifact-hash })
+    (ok true)))
+
+(define-read-only (get-proof (owner principal) (operation-id (buff 32)))
+  (map-get? proofs { owner: owner, operation-id: operation-id }))
+
+(define-read-only (proof-exists (owner principal) (operation-id (buff 32)))
+  (is-some (map-get? proofs { owner: owner, operation-id: operation-id })))
+
+(define-read-only (get-total-proofs) (var-get total-proofs))`;
+
+  const $ = (id) => document.getElementById(id);
+  let walletAddress = '';
+
+  function setStatus(message, tone='') {
+    $('status').textContent = message;
+    $('status').className = `status ${tone}`;
+  }
+  function short(value){ return value ? `${value.slice(0,7)}…${value.slice(-5)}` : ''; }
+  function errorText(error){ return String(error?.message || error || 'Unknown error').split('\n')[0]; }
+  async function sha256(value){ return new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(value))); }
+  function txidOf(result){ return result?.txid || result?.transaction || ''; }
+
+  function storedMainnetAddress(){
+    const entries = getLocalStorage()?.addresses?.stx || [];
+    return entries.find((entry) => entry.address?.startsWith('SP'))?.address || '';
+  }
+
+  async function connectWallet(){
+    const result = await connect({ network: NETWORK });
+    const address = result.addresses.find((entry) => entry.address.startsWith('SP'))?.address;
+    if(!address) throw new Error('Xverse did not return a Stacks mainnet SP address.');
+    walletAddress = address;
+    $('owner').value = address;
+    $('connect').textContent = short(address);
+    $('contractLink').href = `https://explorer.hiro.so/address/${address}.${CONTRACT_NAME}?chain=mainnet`;
+    setStatus(`Connected ${short(address)} on Stacks mainnet.`, 'ok');
+    return address;
+  }
+
+  $('connect').onclick = async () => {
+    try { setStatus('Waiting for Xverse connection…'); await connectWallet(); }
+    catch(error){ setStatus(errorText(error), 'err'); }
+  };
+
+  $('deploy').onclick = async () => {
+    try {
+      if(!walletAddress) await connectWallet();
+      if(walletAddress !== $('owner').value.trim()) $('owner').value = walletAddress;
+      setStatus('Xverse is opening the deployment request. Check the displayed fee before approving.');
+      const result = await request('stx_deployContract', {
+        name: CONTRACT_NAME,
+        clarityCode: SOURCE,
+        clarityVersion: 4,
+        network: NETWORK,
+        postConditionMode: 'deny',
+      });
+      const txid = txidOf(result);
+      if(txid){
+        $('deployTxLink').classList.remove('hidden');
+        $('deployTxLink').href = `https://explorer.hiro.so/txid/${txid}?chain=mainnet`;
+      }
+      setStatus('Deployment submitted. Open the transaction link and wait for SUCCESS before registering the proof.', 'ok');
+    } catch(error){ setStatus(errorText(error), 'err'); }
+  };
+
+  $('register').onclick = async () => {
+    try {
+      if(!walletAddress) await connectWallet();
+      const owner = $('owner').value.trim();
+      const operation = $('operation').value.trim();
+      const artifact = $('artifact').value.trim();
+      const evidence = $('evidence').value.trim();
+      if(!owner.startsWith('SP')) throw new Error('Invalid Stacks mainnet owner address.');
+      if(!operation || !artifact || !/^https?:\/\//.test(evidence)) throw new Error('Proof fields are incomplete.');
+      if(evidence.length > 160) throw new Error('Evidence URL exceeds 160 ASCII characters.');
+      const [operationId, artifactHash] = await Promise.all([sha256(operation), sha256(artifact)]);
+      setStatus('Xverse is opening the proof transaction. Check the displayed fee before approving.');
+      const result = await request('stx_callContract', {
+        contract: `${owner}.${CONTRACT_NAME}`,
+        functionName: 'register-proof',
+        functionArgs: [Cl.buffer(operationId), Cl.buffer(artifactHash), Cl.stringAscii(evidence)],
+        network: NETWORK,
+        postConditionMode: 'deny',
+      });
+      const txid = txidOf(result);
+      if(txid){
+        $('proofTxLink').classList.remove('hidden');
+        $('proofTxLink').href = `https://explorer.hiro.so/txid/${txid}?chain=mainnet`;
+      }
+      setStatus('Proof submitted. Wait for SUCCESS, then tap Verify public receipt.', 'ok');
+    } catch(error){ setStatus(errorText(error), 'err'); }
+  };
+
+  $('verify').onclick = async () => {
+    try {
+      const owner = $('owner').value.trim();
+      const operation = $('operation').value.trim();
+      if(!owner.startsWith('SP')) throw new Error('Invalid Stacks mainnet owner address.');
+      const operationId = await sha256(operation);
+      setStatus('Reading the contract directly from Stacks mainnet…');
+      const response = await fetchCallReadOnlyFunction({
+        contractAddress: owner,
+        contractName: CONTRACT_NAME,
+        functionName: 'get-proof',
+        functionArgs: [Cl.principal(owner), Cl.buffer(operationId)],
+        senderAddress: owner,
+        network: NETWORK,
+      });
+      if(response.type === ClarityType.OptionalNone){
+        $('result').innerHTML = '';
+        setStatus('No receipt found yet. Check that both transactions are confirmed and use the exact operation label.', 'err');
+        return;
+      }
+      if(response.type !== ClarityType.OptionalSome || response.value.type !== ClarityType.Tuple) throw new Error('Unexpected contract response.');
+      const tuple = response.value.value;
+      const artifactHash = tuple['artifact-hash']?.value || '';
+      const evidenceUri = tuple['evidence-uri']?.value || '';
+      const createdAt = tuple['created-at']?.value?.toString?.() || String(tuple['created-at']?.value || '');
+      $('result').innerHTML = `<div><small>Status</small><strong>VERIFIED</strong></div><div><small>Owner</small><strong>${owner}</strong></div><div><small>Artifact hash</small><strong>0x${String(artifactHash).replace(/^0x/,'')}</strong></div><div><small>Evidence</small><strong>${evidenceUri}</strong></div><div><small>Stacks block</small><strong>${createdAt}</strong></div>`;
+      setStatus('Public receipt verified directly from the Stacks contract.', 'ok');
+    } catch(error){ setStatus(errorText(error), 'err'); }
+  };
+
+  window.addEventListener('load', () => {
+    walletAddress = storedMainnetAddress();
+    if(walletAddress){
+      $('owner').value = walletAddress;
+      $('connect').textContent = short(walletAddress);
+      $('contractLink').href = `https://explorer.hiro.so/address/${walletAddress}.${CONTRACT_NAME}?chain=mainnet`;
+      setStatus(`Xverse session detected: ${short(walletAddress)}.`, 'ok');
+    }
+  });
+</script>
+</body>
+</html>
